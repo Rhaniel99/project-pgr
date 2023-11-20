@@ -72,5 +72,6 @@ def RegisterCall():
            CallController.register(calls_instance)
            st.success("Chamada incluída com sucesso")
        else:
-           CallController.upDate(calls_instance)
+           print(callRecover)
+           CallController.upDate(callRecover.get("id"), calls_instance)
            st.success("Chamada atualizada com sucesso")

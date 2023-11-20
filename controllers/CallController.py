@@ -3,6 +3,7 @@ import mysql.connector
 from mysql.connector import Error
 from services.database import criar_conexao
 from models.Called import Call
+from datetime import datetime  # Importe o módulo datetime
 
 
 def register(Call):
@@ -11,7 +12,7 @@ def register(Call):
         cursor = conn.cursor()
 
         sql = """
-        INSERT INTO FormsData(opCalled, repDefect, glpi, locale, status, resp) 
+        INSERT INTO formsdata(opCalled, repDefect, glpi, locale, status, resp) 
         VALUES (%s, %s, %s, %s, %s, %s)
         """
         value = (Call.opCalled, Call.repDefect, Call.glpi,Call.locale, Call.status, Call.resp)
@@ -29,16 +30,21 @@ def register(Call):
         if conn:
             conn.close()
 
-def upDate(Call):
+def upDate(flag, Call):
     try:
         conn = criar_conexao()
         cursor = conn.cursor()
+
+        # Se o status for "Finalizado", atualize também o endCalled
+        if Call.status == "Finalizado":
+            Call.endCalled = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
         sql = """
         UPDATE FormsData 
-        SET opCalled=%s, repDefect=%s, glpi=%s, locale=%s, status=%s, resp=%s
+        SET opCalled=%s, repDefect=%s, glpi=%s, locale=%s, status=%s, resp=%s, endCalled=%s
         WHERE id=%s
         """
-        value = (Call.opCalled, Call.repDefect, Call.glpi, Call.locale, Call.status, Call.resp, Call.id)
+        value = (Call.opCalled, Call.repDefect, Call.glpi, Call.locale, Call.status, Call.resp, Call.endCalled, flag)
 
         cursor.execute(sql, value)
         conn.commit()
