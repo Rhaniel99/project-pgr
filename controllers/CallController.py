@@ -10,9 +10,9 @@ def register(Call):
     try:
         conn = criar_conexao()
         cursor = conn.cursor()
-
+        
         sql = """
-        INSERT INTO formsdata(opCalled, repDefect, glpi, locale, status, resp) 
+        INSERT INTO FormsData(opCalled, repDefect, glpi, locale, status, resp) 
         VALUES (%s, %s, %s, %s, %s, %s)
         """
         value = (Call.opCalled, Call.repDefect, Call.glpi,Call.locale, Call.status, Call.resp)
@@ -35,16 +35,23 @@ def upDate(flag, Call):
         conn = criar_conexao()
         cursor = conn.cursor()
 
-        # Se o status for "Finalizado", atualize também o endCalled
+        # Se o status for "Finalizado", atualize apenas os outros campos
         if Call.status == "Finalizado":
+              # Se o status não for "Finalizado", atualize todos os campos, incluindo endCalled
             Call.endCalled = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-        sql = """
-        UPDATE FormsData 
-        SET opCalled=%s, repDefect=%s, glpi=%s, locale=%s, status=%s, resp=%s, endCalled=%s
-        WHERE id=%s
-        """
-        value = (Call.opCalled, Call.repDefect, Call.glpi, Call.locale, Call.status, Call.resp, Call.endCalled, flag)
+            sql = """
+            UPDATE FormsData 
+            SET opCalled=%s, repDefect=%s, glpi=%s, locale=%s, status=%s, resp=%s, endCalled=%s
+            WHERE id=%s
+            """
+            value = (Call.opCalled, Call.repDefect, Call.glpi, Call.locale, Call.status, Call.resp, Call.endCalled, flag)
+        else:
+            sql = """
+            UPDATE FormsData 
+            SET opCalled=%s, repDefect=%s, glpi=%s, locale=%s, status=%s, resp=%s
+            WHERE id=%s
+            """
+            value = (Call.opCalled, Call.repDefect, Call.glpi, Call.locale, Call.status, Call.resp, flag)
 
         cursor.execute(sql, value)
         conn.commit()
@@ -58,6 +65,7 @@ def upDate(flag, Call):
             cursor.close()
         if conn:
             conn.close()
+
 
 
 def selectOne(id):

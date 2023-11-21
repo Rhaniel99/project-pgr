@@ -1,9 +1,9 @@
 import streamlit as st
 from controllers.CallController import selectAll
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def get_chamados_finalizados_por_tecnico(chamados):
-    # Criar um dicionário para armazenar o número de chamados finalizados por técnico
     chamados_finalizados_por_tecnico = {}
 
     for chamado in chamados:
@@ -71,6 +71,15 @@ def DashBoard():
     # Exibir a tabela
     st.subheader("Último Chamado por Responsável")
     st.table(df[colunas_reorganizadas].style.set_properties(**{'text-align': 'center'}))
+
+    # Criar o gráfico de barras horizontal
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.barh(df['Técnico'], df['Finalizados'])
+    ax.set_xlabel('Chamados Finalizados')
+    ax.set_ylabel('Técnico')
+    ax.set_title('Quantidade de Chamados Finalizados por Técnico')
+    st.pyplot(fig)
+
 
 if __name__ == "__main__":
     DashBoard()

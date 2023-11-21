@@ -2,6 +2,7 @@ import streamlit as st;
 import controllers.CallController as CallController;
 import models.Called as call
 from enum import Enum
+from datetime import datetime
  
 class Names(Enum):
     FABRICIO_SOUZA_NOGUEIRA = "Fabricio Souza Nogueira"
@@ -30,19 +31,17 @@ def RegisterCall():
         )
         st.title("Alterar")
     else:
-        st.title("Incluir")
+        st.title("Cadastrar Chamados")
     
     with st.form(key="include_call"):
         status = ["Aguardando Atendimento", "Em Atendimento", "Finalizado", "Parado"]
         if callRecover == None:
-            input_opCalled = st.date_input(label="Data da Chamada")
             input_repDefect = st.text_input(label="Defeito Reportado")
             input_glpi = st.number_input(label="Número GLPI", format="%d", step=1)
             input_locale = st.text_input(label="Local")
             input_status = st.selectbox("Status:", status)
             input_resp = st.selectbox("Responsável:", [name.value for name in Names])
         else:
-            input_opCalled = st.date_input(label="Data da Chamada", value=callRecover.get("Abertura"))
             input_repDefect = st.text_input(label="Defeito Reportado", value=callRecover.get("DefeitoRelatado"))
             input_glpi = st.number_input(label="Número GLPI", format="%d", step=1, value=callRecover.get("GLPI"))
             input_locale = st.text_input(label="Local", value=callRecover.get("Local"))
@@ -60,18 +59,18 @@ def RegisterCall():
         input_button_submit = st.form_submit_button("Enviar")
                 
     if input_button_submit:
+       op_called = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
        calls_instance = call.Call(
-        opCalled=input_opCalled,
-        repDefect=input_repDefect,
-        glpi=input_glpi,
-        locale=input_locale,
-        status=input_status,
-        resp=input_resp
-    )
+            opCalled=op_called,
+            repDefect=input_repDefect,
+            glpi=input_glpi,
+            locale=input_locale,
+            status=input_status,
+            resp=input_resp
+        )
        if callRecover == None: 
            CallController.register(calls_instance)
            st.success("Chamada incluída com sucesso")
        else:
-           print(callRecover)
            CallController.upDate(callRecover.get("id"), calls_instance)
            st.success("Chamada atualizada com sucesso")
