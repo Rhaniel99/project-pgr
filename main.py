@@ -4,11 +4,9 @@ from page import query as QueryCall
 from page import dashboard as DashBoard
 
 st.set_page_config(layout="wide")
-
 st.sidebar.title("Sejam bem vindos!")
 
 selected_option = st.sidebar.radio('Opções', ['Cadastrar', 'Consultar', 'Dashboard'])
-
 if selected_option == 'Consultar':
     QueryCall.QueryCall()
 
