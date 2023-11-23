@@ -1,7 +1,9 @@
 import streamlit as st
-import page.register as RegisterCall
-import page.query as QueryCall
-import page.dashboard as DashBoard
+from page import register as RegisterCall
+from page import query as QueryCall
+from page import dashboard as DashBoard
+
+st.set_page_config(layout="wide")
 
 st.sidebar.title("Sejam bem vindos!")
 

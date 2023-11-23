@@ -39,7 +39,6 @@ def QueryCall():
 
         # Iterar sobre os chamados na página atual
         for item in chamados[start_idx:end_idx]:
-            # Ajuste os valores aqui para alterar as larguras das colunas
             col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns((33, 25, 25, 25, 25, 25, 25, 25, 25))
             col1.write(item.get('Responsavel', ''))
             col2.write(item.get('DefeitoRelatado', ''))
@@ -71,11 +70,11 @@ def QueryCall():
             if st.session_state.current_page > 0:
                 if st.button("Página Anterior"):
                     st.session_state.current_page -= 1
-                    st.experimental_rerun()  # Mover essa linha para garantir que a página seja alterada imediatamente
+                    st.experimental_rerun()  
             if end_idx < len(chamados):
                 if st.button("Próxima Página"):
                     st.session_state.current_page += 1
-                    st.experimental_rerun()  # Mover essa linha para garantir que a página seja alterada imediatamente
+                    st.experimental_rerun()  
 
     else:
         on_click_return = st.button("Voltar")

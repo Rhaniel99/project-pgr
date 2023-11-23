@@ -5,19 +5,20 @@ from enum import Enum
 from datetime import datetime
  
 class Names(Enum):
-    FABRICIO_SOUZA_NOGUEIRA = "Fabricio Souza Nogueira"
-    JOABE_ARAÚJO_DA_SILVA = "Joabe Araújo da Silva"
-    MANOEL_ADAIDE_FIGUEIRA_ROCHA = "Manoel Adaíde Figueira Rocha"
-    OBEDE_SILVA = "Obede Silva de Menezes Portela"
-    VANUZIVON_CASSIANO = "Vanuzivon Cassiano Rodrigues"
-    VICTOR_HUGO_DE_OLIVEIRA = "Victor Hugo de Oliveira"
-    CARLOS_ROGERIO = "Carlos Rogerio Morais Marinho"
-    DORIVAL_RODRIGUES = "Dorival Rodrigues Gonçalves de Melo"
-    ELINALDO_BRAGA = "Elinaldo Braga de Almeida"
-    GUILHERME_FABIANO = "Guilherme Fabiano Santos Teófilo"
-    JÚNIOR_MACEDO = "Júnior Macedo da Hora"
-    ELISON_BELO = "Elison Belo Alfaia"
-
+    FABRICIO_SOUZA_NOGUEIRA = "FABRICIO SOUZA" #
+    JOABE_ARAÚJO_DA_SILVA = "JOABE ARAUJO" #
+    MANOEL_ADAIDE_FIGUEIRA_ROCHA = "MANOEL ROCHA" #
+    OBEDE_SILVA = "OBEDE SILVA" #
+    VANUZIVON_CASSIANO = "VANUZIVON CASSIANO RODRIGUES" #
+    VICTOR_HUGO_DE_OLIVEIRA = "VICTOR HUGO" #
+    CARLOS_ROGERIO = "CARLOS ROGERIO MORAIS MARINHO" #
+    DORIVAL_RODRIGUES = "DORIVAL RODRIGUES GONCALVES DE MELO" #
+    ELINALDO_BRAGA = "ELINALDO BRAGA" #
+    GUILHERME_FABIANO = "GUILHERME TEÓFILO" #
+    JÚNIOR_MACEDO = "JÚNIOR MACEDO DA HORA" #
+    ELISON_BELO = "ELISON ALFAIA" #
+    WILK_MAX = "WILK MAX MONTEIRO DE AGUIAR" #
+    ANNA_KELLY = "ANNA KELLY" #
  
 def RegisterCall():
     idAlt = st.experimental_get_query_params()
