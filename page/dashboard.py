@@ -20,7 +20,7 @@ def get_chamados_finalizados_por_tecnico(chamados):
 
 def apply_custom_style():
     style.use('dark_background')
-    plt.rcParams['figure.figsize'] = (6, 4.4)
+    plt.rcParams['figure.figsize'] = (6, 3.5)
 
 def DashBoard():
     chamados = selectAll()
