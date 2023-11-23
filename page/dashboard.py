@@ -4,9 +4,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import style
 from st_aggrid import AgGrid, GridOptionsBuilder
-from streamlit_card import card
-from streamlit_cardselectable import st_cardselectable
-import time
 
 def get_chamados_finalizados_por_tecnico(chamados):
     chamados_finalizados_por_tecnico = {}
@@ -66,10 +63,7 @@ def DashBoard():
         'Em Atendimento': len([chamado for chamado in chamados if chamado['Status'] == 'Em Atendimento']),
         'Parado': len([chamado for chamado in chamados if chamado['Status'] == 'Parado'])
     }
-
-        
-
-
+    
     with col2:
         st.subheader("Estatísticas")
         gd_estatisticas = GridOptionsBuilder.from_dataframe(pd.DataFrame(estatisticas.items(), columns=['Estatística', 'Valor']))

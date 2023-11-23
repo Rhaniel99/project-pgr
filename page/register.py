@@ -22,7 +22,6 @@ class Names(Enum):
  
 def RegisterCall():
     idAlt = st.experimental_get_query_params()
-    # Verifica se existe parametro na url e limpa
     callRecover = None
     if idAlt.get("id") != None:
         idAlt = idAlt.get("id")[0]
@@ -46,14 +45,10 @@ def RegisterCall():
             input_repDefect = st.text_input(label="Defeito Reportado", value=callRecover.get("DefeitoRelatado"))
             input_glpi = st.number_input(label="Número GLPI", format="%d", step=1, value=callRecover.get("GLPI"))
             input_locale = st.text_input(label="Local", value=callRecover.get("Local"))
-            # Adicione o status recuperado apenas se não estiver presente na lista status
             input_status_options = [status for status in status if status != callRecover.get("Status")]
-            # Adicione o status recuperado apenas se não estiver presente na lista status
             input_status_options = [callRecover.get("Status")] + input_status_options
             input_status = st.selectbox("Status:", input_status_options)
-             # Remova o responsável recuperado da lista de opções
             input_resp_options = [name.value for name in Names if name.value != callRecover.get("Responsavel")]
-            # Adicione o responsável recuperado apenas se não estiver presente na lista de opções
             input_resp_options = [callRecover.get("Responsavel")] + input_resp_options
             input_resp = st.selectbox("Responsável:", input_resp_options)
 
