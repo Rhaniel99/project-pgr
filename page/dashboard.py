@@ -48,7 +48,7 @@ def DashBoard():
     df['Finalizados'] = df['Técnico'].map(chamados_finalizados_por_tecnico).fillna(0).astype(int)
     df['Término'] = df['Término'].astype(str)
 
-    col1, col2 = st.columns([2, 1], gap="small")
+    col1, col2 = st.columns([3, 1], gap="small")
 
     with col1:
         st.subheader("Tabela de Chamados")
@@ -72,19 +72,19 @@ def DashBoard():
         AgGrid(pd.DataFrame(estatisticas.items(), columns=['Estatística', 'Valor']), gridOptions=grid_options_estatisticas, allow_unsafe_jscode=True, theme='streamlit')
 
 
-        apply_custom_style()
+        # apply_custom_style()
 
-        fig, ax = plt.subplots()
-        bars = ax.barh(df['Técnico'], df['Finalizados'])
-        for bar, label in zip(bars, df['Finalizados']):
-            ax.text(bar.get_width(), bar.get_y() + bar.get_height()/2, label, ha='left', va='center')
-        ax.get_xaxis().set_visible(False)
+        # fig, ax = plt.subplots()
+        # bars = ax.barh(df['Técnico'], df['Finalizados'])
+        # for bar, label in zip(bars, df['Finalizados']):
+        #     ax.text(bar.get_width(), bar.get_y() + bar.get_height()/2, label, ha='left', va='center')
+        # ax.get_xaxis().set_visible(False)
 
-        ax.set_xlabel('Chamados Finalizados')
-        ax.set_ylabel('Técnico')
-        ax.set_title('Quantidade de Chamados Finalizados por Técnico')
+        # ax.set_xlabel('Chamados Finalizados')
+        # ax.set_ylabel('Técnico')
+        # ax.set_title('Quantidade de Chamados Finalizados por Técnico')
 
-        st.pyplot(fig)
+        # st.pyplot(fig)
    
 
 if __name__ == "__main__":
