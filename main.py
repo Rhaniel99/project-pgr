@@ -7,7 +7,7 @@ def main():
     st.set_page_config(layout="wide")
     st.sidebar.title("Sejam bem-vindos!")
 
-    selected_option = st.sidebar.radio('Opções', ['Cadastrar', 'Consultar', 'Dashboard'])
+    selected_option = st.sidebar.radio('Opções', ['Cadastrar', 'Consultar'])
     if selected_option == 'Consultar':
         QueryCall.QueryCall()
 
@@ -15,8 +15,8 @@ def main():
         st.experimental_set_query_params()
         RegisterCall.RegisterCall()
 
-    if selected_option == 'Dashboard':
-        DashBoard.DashBoard()
+    # if selected_option == 'Dashboard':
+    #     DashBoard.DashBoard()
 
 if __name__ == '__main__':
     main()
